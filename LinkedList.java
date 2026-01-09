@@ -95,15 +95,18 @@ public class LinkedList {
             return true;
         }
         // Traverse the list to find the node at the given index
-        Node prev = null;
         Node current = this.first;
         for (int i = 0; i < index - 1; i++) {
-            prev = current;
             current = current.next;
         }
 
         // Remove the node at the given index
-        prev.next = current.next;
+        try {
+            current.next = current.next.next;
+        } catch (NullPointerException e) {
+            current.next = null;
+        }
+        
         this.size--; // Decrease the size of the list
         return true;
     }
